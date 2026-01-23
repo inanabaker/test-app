@@ -8,8 +8,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  ORG: kartverket
-  IMAGE_NAME: skip-hello
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build:
@@ -29,10 +28,10 @@ jobs:
       - name: Build Docker image
         run: |
           docker build \
-            -t ${{ env.REGISTRY }}/${{ env.ORG }}/${{ env.IMAGE_NAME }}:latest .
+            -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest .
             
 
       - name: Push Docker image
         run: |
           docker push \
-            ${{ env.REGISTRY }}/${{ env.ORG }}/${{ env.IMAGE_NAME }}:latest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
