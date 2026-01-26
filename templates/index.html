@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Definitely not a secret</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Please don’t press the button to reveal my secret</h1>
+        <a href="/reveal" class="btn">Ignore the message</a>
+    </div>
+
+</body>
+</html>
