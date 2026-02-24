@@ -1,12 +1,15 @@
 import os
 from flask import Flask, render_template, jsonify
 from sqlalchemy import text
-
+from dotenv import load_dotenv
 from databaseconnection import engine
 
 app = Flask(__name__)
 
 init_sql = "init.sql"
+load_dotenv()
+db_host = os.getenv("POSTGRES_HOST")
+
 
 @app.route('/hello')
 def hello():
@@ -47,8 +50,19 @@ def get_test_data():
         ]
     return jsonify(data)
 
+@app.route("/test-lokal")
+def get_lokal_data():
+    with engine.connect() as conn:
+        result = conn.execute(text("SELECT kommunenummer FROM snoscooterloyper where kommunenummer = '1841';"))
+        rows = result.fetchall()
+
+        data = [
+            {"text": row[0]}
+            for row in rows
+        ]
+    return jsonify(data)
+
 print("Init DB...")
-init_db()
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
